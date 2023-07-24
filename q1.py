@@ -50,6 +50,14 @@ class AntColonyOptimizer:
                 cost += self.distances[from_city, to_city]
             cost += self.distances[routes[:, -1], routes[:, 0]]  # return to starting city
 
+            # Print best route and cost for current iteration
+            best_route_iter = routes[cost.argmin()]
+            best_cost_iter = cost.min()
+            print(routes)
+            print(cost)
+            print(f"Best route in iteration {i+1}: {best_route_iter}")
+            print(f"Best cost in iteration {i+1}: {best_cost_iter}\n")
+
             # Update pheromones
             self.pheromones *= (1 - self.decay)
             for j in range(8):
@@ -68,5 +76,5 @@ if __name__ == "__main__":
     aco = AntColonyOptimizer('adjacency.txt')
     route, cost = aco.solve()
 
-    print('Best route: ', route)
-    print('Best cost: ', cost)
+    print('Final best route: ', route)
+    print('Final best cost: ', cost)
